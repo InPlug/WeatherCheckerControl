@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4C3671D3-351D-490D-BC79-06434D48083D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Vishnu_UserModules</RootNamespace>
+    <AssemblyName>WeatherCheckerControl</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\WeatherCheckerControl.XML</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CustomProgressBar, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vishnu_View.5.1.2\lib\CustomProgressBar.dll</HintPath>
+    </Reference>
+    <Reference Include="NetEti.BasicAppSettings, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vishnu_View.5.1.2\lib\NetEti.BasicAppSettings.dll</HintPath>
+    </Reference>
+    <Reference Include="NetEti.Global, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vishnu_View.5.1.2\lib\NetEti.Global.dll</HintPath>
+    </Reference>
+    <Reference Include="NetEti.InfoController, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vishnu_View.5.1.2\lib\NetEti.InfoController.dll</HintPath>
+    </Reference>
+    <Reference Include="NetEti.MVVMini">
+      <HintPath>..\packages\Vishnu_View.5.1.2\lib\NetEti.MVVMini.dll</HintPath>
+    </Reference>
+    <Reference Include="NetEti.ObjectSerializer, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vishnu_View.5.1.2\lib\NetEti.ObjectSerializer.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Vishnu.Interchange, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vishnu_View.5.1.2\lib\Vishnu.Interchange.dll</HintPath>
+    </Reference>
+    <Reference Include="Vishnu.ViewModel, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Vishnu_View.5.1.2\lib\Vishnu.ViewModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Vishnu.WPF_UI">
+      <HintPath>..\packages\Vishnu_View.5.1.2\lib\Vishnu.WPF_UI.dll</HintPath>
+    </Reference>
+    <Reference Include="WeatherChecker">
+      <HintPath>..\..\WeatherChecker\WeatherChecker\WeatherChecker\bin\Debug\WeatherChecker.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultViewModel.cs" />
+    <Compile Include="SubResultViewModel.cs" />
+    <Compile Include="ValueConverter\WeatherToBitmapImage.cs" />
+    <Compile Include="WeatherCheckerControl.xaml.cs">
+      <DependentUpon>WeatherCheckerControl.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="WeatherCheckerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Media\clearday.png" />
+    <Resource Include="Media\clearnight.png" />
+    <Resource Include="Media\cloudyday.png" />
+    <Resource Include="Media\cloudynight.png" />
+    <Resource Include="Media\humidday.png" />
+    <Resource Include="Media\humidnight.png" />
+    <Resource Include="Media\ishowerday.png" />
+    <Resource Include="Media\ishowernight.png" />
+    <Resource Include="Media\lightrainday.png" />
+    <Resource Include="Media\lightrainnight.png" />
+    <Resource Include="Media\lightsnowday.png" />
+    <Resource Include="Media\lightsnownight.png" />
+    <Resource Include="Media\mcloudyday.png" />
+    <Resource Include="Media\mcloudynight.png" />
+    <Resource Include="Media\oshowerday.png" />
+    <Resource Include="Media\oshowernight.png" />
+    <Resource Include="Media\pcloudyday.png" />
+    <Resource Include="Media\pcloudynight.png" />
+    <Resource Include="Media\rainday.png" />
+    <Resource Include="Media\rainnight.png" />
+    <Resource Include="Media\rainsnowday.png" />
+    <Resource Include="Media\rainsnownight.png" />
+    <Resource Include="Media\snowday.png" />
+    <Resource Include="Media\snownight.png" />
+    <Resource Include="Media\tsday.png" />
+    <Resource Include="Media\tsnight.png" />
+    <Resource Include="Media\tsrainday.png" />
+    <Resource Include="Media\tsrainnight.png" />
+    <Resource Include="Media\windy.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

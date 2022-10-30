@@ -1,0 +1,284 @@
+﻿<vm:DynamicUserControlBase x:Class="Vishnu_UserModules.WeatherCheckerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Vishnu_UserModules"
+             xmlns:ctrl="clr-namespace:NetEti.CustomControls;assembly=CustomProgressBar"
+             xmlns:convert="clr-namespace:Vishnu.WPF_UI.ValueConverter;assembly=Vishnu.WPF_UI"
+             xmlns:localConvert="clr-namespace:Vishnu_UserModules.ValueConverter"
+             xmlns:vm="clr-namespace:Vishnu.ViewModel;assembly=Vishnu.ViewModel"
+             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+             mc:Ignorable="d">
+    <vm:DynamicUserControlBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Vishnu.WPF_UI;component/Assets/LogicalTaskTreeControlStaticResourceDictionary.xaml" />
+                <ResourceDictionary Source="/Vishnu.WPF_UI;component/Assets/LogicalTaskTreeControlResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary x:Key="WeatherImageDictionary">
+                <BitmapImage x:Key="clearday" UriSource="./Media/clearday.png" />
+                <BitmapImage x:Key="clearnight" UriSource="./Media/clearnight.png" />
+                <BitmapImage x:Key="cloudyday" UriSource="./Media/cloudyday.png" />
+                <BitmapImage x:Key="cloudynight" UriSource="./Media/cloudynight.png" />
+                <BitmapImage x:Key="humidday" UriSource="./Media/humidday.png" />
+                <BitmapImage x:Key="humidnight" UriSource="./Media/humidnight.png" />
+                <BitmapImage x:Key="ishowerday" UriSource="./Media/ishowerday.png" />
+                <BitmapImage x:Key="ishowernight" UriSource="./Media/ishowernight.png" />
+                <BitmapImage x:Key="lightrainday" UriSource="./Media/lightrainday.png" />
+                <BitmapImage x:Key="lightrainnight" UriSource="./Media/lightrainnight.png" />
+                <BitmapImage x:Key="lightsnowday" UriSource="./Media/lightsnowday.png" />
+                <BitmapImage x:Key="lightsnownight" UriSource="./Media/lightsnownight.png" />
+                <BitmapImage x:Key="mcloudyday" UriSource="./Media/mcloudyday.png" />
+                <BitmapImage x:Key="mcloudynight" UriSource="./Media/mcloudynight.png" />
+                <BitmapImage x:Key="oshowerday" UriSource="./Media/oshowerday.png" />
+                <BitmapImage x:Key="oshowernight" UriSource="./Media/oshowernight.png" />
+                <BitmapImage x:Key="pcloudyday" UriSource="./Media/pcloudyday.png" />
+                <BitmapImage x:Key="pcloudynight" UriSource="./Media/pcloudynight.png" />
+                <BitmapImage x:Key="rainday" UriSource="./Media/rainday.png" />
+                <BitmapImage x:Key="rainnight" UriSource="./Media/rainnight.png" />
+                <BitmapImage x:Key="rainsnowday" UriSource="./Media/rainsnowday.png" />
+                <BitmapImage x:Key="rainsnownight" UriSource="./Media/rainsnownight.png" />
+                <BitmapImage x:Key="snowday" UriSource="./Media/snowday.png" />
+                <BitmapImage x:Key="snownight" UriSource="./Media/snownight.png" />
+                <BitmapImage x:Key="tsday" UriSource="./Media/tsday.png" />
+                <BitmapImage x:Key="tsnight" UriSource="./Media/tsnight.png" />
+                <BitmapImage x:Key="tsrainday" UriSource="./Media/tsrainday.png" />
+                <BitmapImage x:Key="tsrainnight" UriSource="./Media/tsrainnight.png" />
+                <BitmapImage x:Key="windy" UriSource="./Media/windy.png" />
+            </ResourceDictionary>
+            <convert:NullableBoolToBrush x:Key="nullableBoolToBrush" />
+            <convert:ChildOrientationToExpandDirection x:Key="childOrientationToExpandDirection" />
+            <convert:VisualNodeWorkerStateToText x:Key="workersStateToText" />
+            <convert:VisualNodeStateToBitmapImage x:Key="visualNodeStateToBitmapImage" />
+            <convert:NotEmptyToTrue x:Key="notEmptyToTrue" />
+            <localConvert:WeatherToBitmapImage x:Key="weatherToBitmapImage" />
+            <x:Code>
+                <![CDATA[
+                                    private void ItemBorder_MouseDown(object sender, MouseButtonEventArgs e)
+                                    {
+                                        Console.WriteLine("border1_MouseDown");
+                                        e.Handled = true; // Console.WriteLine("border1_MouseDown: setting e.Handled to true.");
+                                    }
+                                ]]>
+            </x:Code>
+            <DataTemplate DataType="{x:Type vm:VishnuViewModelBase}">
+                <Border Name="ItemBorder" Background="Transparent" MouseDown="ItemBorder_MouseDown" Visibility="{Binding Visibility}">
+                    <Grid>
+                        <Grid.ToolTip>
+                            <ToolTip Content="{Binding NextRunInfo}" ContentStringFormat="nächster Lauf: {0}"
+                                     ToolTipService.ShowDuration="30000" ToolTipService.InitialShowDelay="1400" />
+                        </Grid.ToolTip>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0" Margin="0,5,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ctrl:CustomProgressBar Grid.Row="0" Grid.Column="0" Name="cpBar" Value="{Binding Path=SingleNodesFinished}"
+                                                    Text="{Binding Path=ProgressText}"
+                                                    Height="22" Width="60" Padding="5">
+                                <ctrl:CustomProgressBar.Foreground>
+                                    <MultiBinding Converter="{StaticResource nullableBoolToBrush, diag:PresentationTraceSources.TraceLevel=High}">
+                                        <Binding Path="Logical" />
+                                        <Binding RelativeSource="{RelativeSource Self}" />
+                                    </MultiBinding>
+                                </ctrl:CustomProgressBar.Foreground>
+                            </ctrl:CustomProgressBar>
+                            <Grid Margin="4,7,4,7" Grid.Row="0" Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button Name="btnRunLogicalTaskTree" Grid.Column="0" Visibility="Hidden"
+                                         Padding="5,0,5,0" Width="34"
+                                    Command="{Binding RunLogicalTaskTree, diag:PresentationTraceSources.TraceLevel=High}"
+                                    FontSize="8">
+                                    <Button.Content>
+                                        <Binding Path="ButtonRunText" />
+                                    </Button.Content>
+                                </Button>
+                                <Button Name="btnBreakLogicalTaskTree" Grid.Column="1" Visibility="Hidden"
+                                        Padding="5,0,5,0"
+                                    Command="{Binding BreakLogicalTaskTree, diag:PresentationTraceSources.TraceLevel=High}"
+                                    FontSize="8">
+                                    <Button.Content>
+                                        <Binding Path="ButtonBreakText" />
+                                    </Button.Content>
+                                </Button>
+                            </Grid>
+                            <Ellipse Name="ColorRing" Grid.Row="0" Grid.Column="1" Margin="3"
+                                 Width="{DynamicResource ColorRing.Width}"
+                                 Height="{DynamicResource ColorRing.Width}">
+                                <Ellipse.Fill>
+                                    <MultiBinding Converter="{StaticResource nullableBoolToBrush, diag:PresentationTraceSources.TraceLevel=High}">
+                                        <Binding Path="Logical" />
+                                        <Binding RelativeSource="{RelativeSource Self}" />
+                                    </MultiBinding>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Name="ColorPoint" Grid.Row="0" Grid.Column="1" Margin="3"
+                                 Width="{DynamicResource ColorPoint.Width}"
+                                 Height="{DynamicResource ColorPoint.Width}">
+                                <Ellipse.Fill>
+                                    <MultiBinding Converter="{StaticResource nullableBoolToBrush, diag:PresentationTraceSources.TraceLevel=High}">
+                                        <Binding Path="LastNotNullLogical" />
+                                        <Binding RelativeSource="{RelativeSource Self}" />
+                                    </MultiBinding>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock Name="NameText" Grid.Row="0" Grid.Column="2" Text="{Binding Name}" Padding="5" Margin="0,0,0,0"/>
+                            <TextBlock Grid.Row="0" Grid.Column="3" FontSize="8" Margin="0,0,0,0">
+                                <TextBlock.Text>
+                                    <Binding Path="WorkersState" Converter="{StaticResource workersStateToText}" />
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <Image Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" Margin="4,2,5,0" Height="14" Width="14">
+                                <Image.Source>
+                                    <MultiBinding Converter="{StaticResource visualNodeStateToBitmapImage, diag:PresentationTraceSources.TraceLevel=High}">
+                                        <Binding Path="VisualState" />
+                                        <Binding Source="{StaticResource BitmapImageDictionary}" />
+                                    </MultiBinding>
+                                </Image.Source>
+                            </Image>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" DataContext="{Binding Path=UserDataContext}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Padding="5,3,5,3" Margin="2">
+                                <TextBlock Name="ComplexResultComment" TextWrapping="Wrap" MaxWidth="500" HorizontalAlignment="Center"
+                                       Text="{Binding Headline}" Padding="5,0,5,0" FontSize="18"/>
+                            </Border>
+                            <ListBox Name="ComplexResultSubResults" Grid.Row="3" Grid.Column="0" 
+                                     ItemsSource="{Binding SubResults}" MaxWidth="690"
+                                     MinHeight="140" Margin="5,10,5,5" 
+                                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                     PreviewMouseWheel="ListBox_PreviewMouseWheel">
+                                <ListBox.Style>
+                                    <Style TargetType="ListBox">
+                                        <Style.Resources>
+                                            <Style TargetType="{x:Type ScrollBar}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="Orientation" Value="Horizontal">
+                                                        <Setter Property="Height" Value="8" />
+                                                        <Setter Property="MinHeight" Value="8" />
+                                                    </Trigger>
+                                                    <Trigger Property="Orientation" Value="Vertical">
+                                                        <Setter Property="Width" Value="8" />
+                                                        <Setter Property="MinWidth" Value="8" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <Trigger Property="HasItems" Value="false">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate>
+                                                            <Border Margin="5,0,5,0" Background="GhostWhite" BorderBrush="DarkGray" BorderThickness="1">
+                                                                <TextBlock Text=" - keine Daten -" Foreground="DarkGray"/>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ListBox.Style>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                        </Grid>
+
+                        <TextBlock Name="LastRunInfo" Grid.Row="2" Grid.Column="0" Margin="0,15,0,0"
+                                       Text="{Binding LastRunInfo, StringFormat=letzter Lauf: {0}}" Padding="5,0,5,5"/>
+                    </Grid>
+                </Border>
+                <DataTemplate.Triggers>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsMouseOver}" Value="True"/>
+                            <Condition Binding="{Binding IsSnapshotDummy}" Value="False" />
+                        </MultiDataTrigger.Conditions>
+                        <Setter
+                                                    TargetName="btnRunLogicalTaskTree"
+                                                    Property="Visibility"                     
+                                                    Value="visible" />
+                        <Setter
+                                                    TargetName="btnBreakLogicalTaskTree"
+                                                    Property="Visibility"                     
+                                                    Value="visible" />
+                    </MultiDataTrigger>
+                    <DataTrigger Binding="{Binding IsSnapshotDummy}" Value="true">
+                        <Setter TargetName="cpBar" Property="Value" Value="100" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type local:SubResultViewModel}">
+                <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                    <TextBlock Text="{Binding Path=Date}" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding Path=Time}" HorizontalAlignment="Center" />
+                    <Image HorizontalAlignment="Center" Margin="5,0,5,0">
+                        <Image.Source>
+                            <MultiBinding Converter="{StaticResource weatherToBitmapImage, diag:PresentationTraceSources.TraceLevel=High}">
+                                <Binding Path="Weather" />
+                                <Binding Source="{StaticResource WeatherImageDictionary}" />
+                            </MultiBinding>
+                        </Image.Source>
+                    </Image>
+                    <Border Background="AntiqueWhite" BorderBrush="Gray" BorderThickness="1">
+                        <Grid>
+                            <Grid.Resources >
+                                <Style TargetType="Border" >
+                                    <Setter Property="Padding" Value="5,0,5,0" />
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"  />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Grid.Column="0" >
+                                <TextBlock Text="{Binding Path=Temperature}" HorizontalAlignment="Left" />
+                            </Border>
+                            <Border Grid.Row="0" Grid.Column="1" >
+                                <TextBlock Text="{Binding Path=Humidity}" HorizontalAlignment="Left" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </vm:DynamicUserControlBase.Resources>
+    <ContentControl Content="{Binding}" />
+</vm:DynamicUserControlBase>
