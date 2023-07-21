@@ -49,17 +49,17 @@ namespace Vishnu_UserModules
 
         private void content_Rendered(object sender, RoutedEventArgs e)
         {
-            (this.UserResultViewModel as ResultViewModel).HandleResultPropertyChanged();
+            ((ResultViewModel?)this.UserResultViewModel)?.HandleResultPropertyChanged();
         }
 
         private void ListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            ListBox listBox = sender as ListBox;
-            ScrollViewer scrollviewer = UIHelper.FindFirstVisualChildOfType<ScrollViewer>(listBox);
+            ListBox listBox = (ListBox)sender;
+            ScrollViewer? scrollviewer = UIHelper.FindFirstVisualChildOfType<ScrollViewer>(listBox);
             if (e.Delta > 0)
-                scrollviewer.LineLeft();
+                scrollviewer?.LineLeft();
             else
-                scrollviewer.LineRight();
+                scrollviewer?.LineRight();
             e.Handled = true;
 
         }

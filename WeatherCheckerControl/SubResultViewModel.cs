@@ -1,5 +1,6 @@
 ﻿using System;
 using Vishnu.ViewModel;
+using WeatherChecker;
 
 namespace Vishnu_UserModules
 {
@@ -21,7 +22,7 @@ namespace Vishnu_UserModules
         /// <summary>
         /// Der darzustellende Wettertyp als String.
         /// </summary>
-        public string Weather
+        public string? Weather
         {
             get
             {
@@ -96,7 +97,7 @@ namespace Vishnu_UserModules
         /// <summary>
         /// Ein Datensatz als string.
         /// </summary>
-        public string ResultRecordString
+        public string? ResultRecordString
         {
             get
             {
@@ -109,9 +110,9 @@ namespace Vishnu_UserModules
         /// Liefert die Properties als String aufbereitet. 
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
+        public override string? ToString()
         {
-            return this.ResultRecordString?.ToString();
+            return this.ResultRecordString;
         }
 
         /// <summary>
@@ -125,7 +126,7 @@ namespace Vishnu_UserModules
             this._init = init == 18 ? 0 : init + 6;
         }
 
-        internal WeatherChecker_ReturnObject.ForecastDataPoint Result
+        internal WeatherChecker_ReturnObject.ForecastDataPoint? Result
         {
             get
             {
@@ -143,16 +144,16 @@ namespace Vishnu_UserModules
         }
         private DateTime _initDateTime;
         private int _init;
-        private WeatherChecker_ReturnObject.ForecastDataPoint _result;
+        private WeatherChecker_ReturnObject.ForecastDataPoint? _result;
 
         private int CalculateHour()
         {
-            return (this._init + this.Result.Timepoint - 3) % 24;
+            return (this._init + this.Result?.Timepoint ?? 0 - 3) % 24;
         }
 
         private string CalculateDDMM()
         {
-            return this._initDateTime.AddDays((this._init + this.Result.Timepoint - 3) / 24).ToString("dd.MM");
+            return this._initDateTime.AddDays((this._init + this.Result?.Timepoint ?? 0 - 3) / 24).ToString("dd.MM");
         }
 
     }

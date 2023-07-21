@@ -15,7 +15,7 @@ namespace Vishnu_UserModules
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            (this.DataContext as SingleNodeViewModel).RaiseAllProperties();
+            ((SingleNodeViewModel)this.DataContext).RaiseAllProperties();
         }
     }
 }

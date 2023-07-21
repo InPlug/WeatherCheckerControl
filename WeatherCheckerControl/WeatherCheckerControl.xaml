@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Vishnu_UserModules"
-             xmlns:ctrl="clr-namespace:NetEti.CustomControls;assembly=CustomProgressBar"
+             xmlns:ctrl="clr-namespace:NetEti.CustomControls;assembly=NetEti.CustomProgressBar"
              xmlns:convert="clr-namespace:Vishnu.WPF_UI.ValueConverter;assembly=Vishnu.WPF_UI"
              xmlns:localConvert="clr-namespace:Vishnu_UserModules.ValueConverter"
              xmlns:vm="clr-namespace:Vishnu.ViewModel;assembly=Vishnu.ViewModel"

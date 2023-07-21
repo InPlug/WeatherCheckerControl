@@ -3,6 +3,7 @@ using System;
 using System.Windows.Input;
 using Vishnu.Interchange;
 using Vishnu.ViewModel;
+using WeatherChecker;
 
 namespace Vishnu_UserModules
 {
@@ -20,7 +21,7 @@ namespace Vishnu_UserModules
         /// Der Name des zugehörigen LogicalTaskTree-Knotens
         /// für die UI verfügbar gemacht.
         /// </summary>
-        public string Name
+        public string? Name
         {
             get
             {
@@ -122,7 +123,7 @@ namespace Vishnu_UserModules
         /// Ein Text für die Anzahl der beendeten Endknoten dieses Teilbaums
         /// zur Anzeige im ProgressBar (i.d.R. nnn%) für die UI verfügbar gemacht.
         /// </summary>
-        public string ProgressText
+        public string? ProgressText
         {
             get
             {
@@ -162,7 +163,7 @@ namespace Vishnu_UserModules
         /// <summary>
         /// Das ReturnObject der zugeordneten LogicalNode.
         /// </summary>
-        public override Result Result
+        public override Result? Result
         {
             get
             {
@@ -307,9 +308,9 @@ namespace Vishnu_UserModules
                                    new Result("Main", true, NodeState.Finished, NodeLogicalState.Done, demoReturnObject) } });
 
             // Der nachfolgende Teil reicht für den Aufruf eines einfachen Checkers:
-            WeatherChecker demoChecker = new WeatherChecker();
+            WeatherChecker.WeatherChecker demoChecker = new();
             bool? logicalResult = demoChecker.Run(@"UserParameter", new TreeParameters("MainTree", null), treeEvent);
-            this._returnObject = (demoChecker.ReturnObject as WeatherChecker_ReturnObject);
+            this._returnObject = ((WeatherChecker_ReturnObject?)demoChecker.ReturnObject);
             /*
             // Dieser auskommentierte Teil simuliert ein Ergebnis des WeatherCheckers; Kann benutzt werden,
             // falls die API mal nicht erreichbar sein sollte.
@@ -534,21 +535,21 @@ namespace Vishnu_UserModules
             this.RaisePropertyChanged("ButtonBreakText");
         }
 
-        private Vishnu.Interchange.Result _result;
-        private WeatherChecker_ReturnObject _returnObject;
+        private Vishnu.Interchange.Result? _result;
+        private WeatherChecker_ReturnObject? _returnObject;
         private bool? _logical;
         private bool? _lastNotNullLogical;
         private VisualNodeState _visualState;
-        private string _progressText;
+        private string? _progressText;
         private int _singleNodesFinished;
-        private string _name;
+        private string? _name;
         private VisualNodeWorkerState _workersState;
         private RelayCommand _btnRunTaskTreeRelayCommand;
         private RelayCommand _btnBreakTaskTreeRelayCommand;
         private DateTime _lastRun;
         private bool _isSnapshotDummy;
 
-        private void runTaskTreeExecute(object parameter)
+        private void runTaskTreeExecute(object? parameter)
         {
             this._lastRun = DateTime.Now;
             this.Logical = true;
@@ -565,7 +566,7 @@ namespace Vishnu_UserModules
             return true;
         }
 
-        private void breakTaskTreeExecute(object parameter)
+        private void breakTaskTreeExecute(object? parameter)
         {
             this.Logical = null;
             this.LastNotNullLogical = null;

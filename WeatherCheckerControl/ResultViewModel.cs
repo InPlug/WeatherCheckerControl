@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Vishnu.ViewModel;
 using System.Collections.Generic;
 using System.Globalization;
+using WeatherChecker;
 
 namespace Vishnu_UserModules
 {
@@ -21,18 +22,18 @@ namespace Vishnu_UserModules
         /// <summary>
         /// Die Anzahl der Datenpunkte.
         /// </summary>
-        public long RecordCount
+        public int RecordCount
         {
             get
             {
-                return this.GetResultProperty<long>(typeof(WeatherChecker_ReturnObject), "RecordCount");
+                return this.GetResultProperty<int>(typeof(WeatherChecker_ReturnObject), "RecordCount");
             }
         }
 
         /// <summary>
         /// Der Initialisierungszeitpunkt.
         /// </summary>
-        public string Init
+        public string? Init
         {
             get
             {
@@ -81,7 +82,7 @@ namespace Vishnu_UserModules
                 =>
                 {
                     this.SubResults.Clear();
-                    List<WeatherChecker_ReturnObject.ForecastDataPoint> dataseries
+                    List<WeatherChecker_ReturnObject.ForecastDataPoint>? dataseries
                         = this.GetResultProperty<List<WeatherChecker_ReturnObject.ForecastDataPoint>>(typeof(WeatherChecker_ReturnObject), "Dataseries");
                     /*
                         WeatherChecker_ReturnObject returnObject = this.GetResultProperty<WeatherChecker_ReturnObject>(typeof(WeatherChecker_ReturnObject), null);
@@ -121,7 +122,7 @@ namespace Vishnu_UserModules
             this.RaisePropertyChanged("RecordCount");
         }
 
-        private void parentViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void parentViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "Result")
             {
