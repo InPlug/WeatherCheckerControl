@@ -64,11 +64,7 @@
             </x:Code>
             <DataTemplate DataType="{x:Type vm:VishnuViewModelBase}">
                 <Border Name="ItemBorder" Background="Transparent" MouseDown="ItemBorder_MouseDown" Visibility="{Binding Visibility}">
-                    <Grid>
-                        <Grid.ToolTip>
-                            <ToolTip Content="{Binding NextRunInfo}" ContentStringFormat="nächster Lauf: {0}"
-                                     ToolTipService.ShowDuration="30000" ToolTipService.InitialShowDelay="1400" />
-                        </Grid.ToolTip>
+                    <Grid ToolTip="{StaticResource cmToolTip}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
