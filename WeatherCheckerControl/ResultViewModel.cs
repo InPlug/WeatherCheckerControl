@@ -75,18 +75,6 @@ namespace Vishnu_UserModules
             this.Dispatcher.Invoke(new Action(()
                 =>
                 {
-                    GeoLocation_ReturnObject? location
-                        = this.GetResultProperty<GeoLocation_ReturnObject>(typeof(WeatherChecker_ReturnObject), "Location");
-                    if (location != null)
-                    {
-                        this.Headline = location.city + ", " + location.regionName; // + ", " + location.country;
-                    }
-                    else
-                    {
-                        this.Headline = "Wetter Düsseldorf, Nordrhein-Westfalen";
-                    }
-                    this.RaisePropertyChanged("Headline");
-
                     this.SubResults.Clear();
                     List<WeatherChecker_ReturnObject.ForecastDataPoint>? dataseries
                         = this.GetResultProperty<List<WeatherChecker_ReturnObject.ForecastDataPoint>>(typeof(WeatherChecker_ReturnObject), "Dataseries");
@@ -104,6 +92,18 @@ namespace Vishnu_UserModules
 
                     if (dataseries != null)
                     {
+                        GeoLocation_ReturnObject? location
+                            = this.GetResultProperty<GeoLocation_ReturnObject>(typeof(WeatherChecker_ReturnObject), "Location");
+                        if (location != null)
+                        {
+                            this.Headline = location.city + ", " + location.regionName; // + ", " + location.country;
+                        }
+                        else
+                        {
+                            this.Headline = "Wetter Düsseldorf, Nordrhein-Westfalen";
+                        }
+                        this.RaisePropertyChanged("Headline");
+
                         this.RaisePropertyChanged("SubResults");
                         DateTime initDateTime = DateTime.Now;
                         int initInt = 0;
