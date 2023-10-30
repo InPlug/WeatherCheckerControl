@@ -62,7 +62,7 @@ namespace Vishnu_UserModules
         /// Merkfeld für den letzten Zustand von Logical, der nicht null war;
         /// Wird benötigt, damit Worker nur dann gestartet werden, und die 
         /// Anzeige wechselt, wenn sich der Zustand von Logical signifikant
-        /// geändert hat und nicht jedesmal, wenn der Checker arbeitet (Logical = null).
+        /// geändert hat und nicht jedes mal, wenn der Checker arbeitet (Logical = null).
         /// </summary>
         public bool? LastNotNullLogical
         {
@@ -211,7 +211,7 @@ namespace Vishnu_UserModules
         }
 
         /// <summary>
-        /// Kombinierte Ausgabe von NextRunInfo (wann ist der nächsta Durchlauf)
+        /// Kombinierte Ausgabe von NextRunInfo (wann ist der nächste Durchlauf)
         /// und Result (in voller Länge).
         /// </summary>
         public string NextRunInfoAndResult
