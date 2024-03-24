@@ -96,7 +96,7 @@ namespace Vishnu_UserModules
                             = this.GetResultProperty<GeoLocation_ReturnObject>(typeof(WeatherChecker_ReturnObject), "Location");
                         if (location != null)
                         {
-                            this.Headline = location.city + ", " + location.regionName; // + ", " + location.country;
+                            this.Headline = location.City + ", " + location.Region; // + ", " + location.country;
                         }
                         else
                         {
