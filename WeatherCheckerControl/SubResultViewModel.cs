@@ -43,7 +43,7 @@ namespace Vishnu_UserModules
             {
                 if (this.Result != null)
                 {
-                    return this.CalculateDDMM();
+                    return this.CalculateDDMM(this.Result.Timepoint?? "0000-00-00T00:00:00");
                 }
                 return "";
             }
@@ -58,14 +58,14 @@ namespace Vishnu_UserModules
             {
                 if (this.Result != null)
                 {
-                    return String.Format("{0} Uhr", this.CalculateHour());
+                    return String.Format("{0} Uhr", this.Result?.Timepoint?.Substring(11, 5) ?? "00:00");
                 }
                 return "";
             }
         }
 
         /// <summary>
-        /// Die darzustellende Uhrzeit als String.
+        /// Die darzustellende Temperatur als String.
         /// </summary>
         public string Temperature
         {
@@ -73,14 +73,14 @@ namespace Vishnu_UserModules
             {
                 if (this.Result != null)
                 {
-                    return String.Format("{0} °C", this.Result.Temp2m);
+                    return String.Format("{0}", this.Result.Temperature);
                 }
                 return "";
             }
         }
 
         /// <summary>
-        /// Die darzustellende Uhrzeit als String.
+        /// Die darzustellende Luftfeuchtigkeit als String.
         /// </summary>
         public string Humidity
         {
@@ -88,7 +88,7 @@ namespace Vishnu_UserModules
             {
                 if (this.Result != null)
                 {
-                    return String.Format("{0}", this.Result.Rh2m);
+                    return String.Format("{0}", this.Result.Humidity);
                 }
                 return "";
             }
@@ -140,20 +140,17 @@ namespace Vishnu_UserModules
                 }
                 this.RaisePropertyChanged("Time");
                 this.RaisePropertyChanged("Weather");
+                this.RaisePropertyChanged("Humidity");
+                this.RaisePropertyChanged("Temperature");
             }
         }
         private DateTime _initDateTime;
         private int _init;
         private WeatherChecker_ReturnObject.ForecastDataPoint? _result;
 
-        private int CalculateHour()
+        private string CalculateDDMM(string timepoint)
         {
-            return (this._init + this.Result?.Timepoint ?? 0 - 3) % 24;
-        }
-
-        private string CalculateDDMM()
-        {
-            return this._initDateTime.AddDays((this._init + this.Result?.Timepoint ?? 0 - 3) / 24).ToString("dd.MM");
+            return DateTime.Parse(timepoint).ToString("dd.MM");
         }
 
     }

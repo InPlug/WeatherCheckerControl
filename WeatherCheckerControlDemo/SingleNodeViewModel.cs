@@ -1,10 +1,12 @@
 ﻿using NetEti.MVVMini;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using Vishnu.Interchange;
 using Vishnu.ViewModel;
 using WeatherChecker;
+using static WeatherChecker.WeatherChecker_ReturnObject.ForecastDataPoint;
 
 namespace Vishnu_UserModules
 {
@@ -313,15 +315,16 @@ namespace Vishnu_UserModules
             WeatherChecker.WeatherChecker demoChecker = new();
             bool? logicalResult = demoChecker.Run(@"UserParameter", new TreeParameters("MainTree", null), treeEvent);
             this._returnObject = ((WeatherChecker_ReturnObject?)demoChecker.ReturnObject);
-            /*
+            
             // Dieser auskommentierte Teil simuliert ein Ergebnis des WeatherCheckers; Kann benutzt werden,
             // falls die API mal nicht erreichbar sein sollte.
+            /*
             this._returnObject = new WeatherChecker_ReturnObject()
             {
                 Dataseries = new List<WeatherChecker_ReturnObject.ForecastDataPoint>()
                 {
-                    new WeatherChecker_ReturnObject.ForecastDataPoint() { Timepoint = 3
-                    , Cloudcover = 9, Lifted_Index = 6, Prec_Type = "none", Prec_Amount = 0, Temp2m = 12, Rh2m = "81%",
+                    new WeatherChecker_ReturnObject.ForecastDataPoint() { Timepoint = "2024-01-01T00:00:00"
+                    , Cloudcover = 9, Lifted_Index = 6, Prec_Type = "none", Prec_Amount = 0, Temperature = "11", Humidity = "81",
                     Wind10m = new Wind() {Direction = "S", Speed = 2}, Weather = "cloudynight"},
                     new WeatherChecker_ReturnObject.ForecastDataPoint() { Timepoint = 6
                     , Cloudcover = 9, Lifted_Index = 6, Prec_Type = "none", Prec_Amount = 0, Temp2m = 11, Rh2m = "90%",

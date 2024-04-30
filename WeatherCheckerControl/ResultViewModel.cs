@@ -33,11 +33,11 @@ namespace Vishnu_UserModules
         /// <summary>
         /// Der Initialisierungszeitpunkt.
         /// </summary>
-        public string? Init
+        public string? Creation
         {
             get
             {
-                return this.GetResultProperty<string>(typeof(WeatherChecker_ReturnObject), "Init");
+                return this.GetResultProperty<string>(typeof(WeatherChecker_ReturnObject), "Creation");
             }
         }
 
@@ -107,14 +107,14 @@ namespace Vishnu_UserModules
                         this.RaisePropertyChanged("SubResults");
                         DateTime initDateTime = DateTime.Now;
                         int initInt = 0;
-                        if (this.Init != null && this.Init.Length == 10)
+                        if (this.Creation != null && this.Creation.Length == 10)
                         {
-                            DateTime.TryParseExact(this.Init.Substring(0, 8),
+                            DateTime.TryParseExact(this.Creation.Substring(0, 8),
                                               "yyyyMMdd",
                                               CultureInfo.InvariantCulture,
                                               DateTimeStyles.None,
                                               out initDateTime);
-                            int.TryParse(this.Init.Substring(8), out initInt);
+                            int.TryParse(this.Creation.Substring(8), out initInt);
                         }
                         for (int i = 0; i < dataseries.Count; i++)
                         {
