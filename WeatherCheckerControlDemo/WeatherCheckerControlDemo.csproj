@@ -10,13 +10,14 @@
     <Company>NetEti</Company>
     <Description>$(AssemblyName) - Demoprogramm</Description>
     <Copyright>Copyright © $(Authors) 2022-$([System.DateTime]::Now.Year)</Copyright>
-    <AssemblyVersion>8.0.0.0</AssemblyVersion>
-    <FileVersion>8.0.0.0</FileVersion>
+    <AssemblyVersion>8.0.1.0</AssemblyVersion>
+    <FileVersion>8.0.1.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup>
     <AssemblyRoot>$(ProjectDir)../../../ReadyBin/Assemblies</AssemblyRoot>
     <UserAssemblyRoot>$(ProjectDir)../../../ReadyBin/UserAssemblies</UserAssemblyRoot>
+    <ApplicationIcon>Vishnu_multi.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(ProjectDir)../../AddOn/proj/*" Condition="exists('$(ProjectDir)../../AddOn/proj')" />
 
@@ -50,6 +51,10 @@
 		  </ItemGroup>
     </Otherwise>
 	</Choose>
+
+	<ItemGroup>
+	  <Content Include="Vishnu_multi.ico" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
