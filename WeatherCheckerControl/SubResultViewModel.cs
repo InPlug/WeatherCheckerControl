@@ -592,9 +592,14 @@ namespace Vishnu_UserModules
             }
         }
 
+        /// <summary>
+        /// Gibt an, ob ein Popup offen ist.
+        /// </summary>
         public bool IsPopupOpen { get; set; }
 
-        // Kommando zum Schließen des Popups
+        /// <summary>
+        /// Kommando zum Schließen des Popups
+        /// </summary>
         public ICommand ClosePopupCommand { get; }
 
         private void ClosePopup(object? parameter)
@@ -603,7 +608,9 @@ namespace Vishnu_UserModules
             RaisePropertyChanged(nameof(IsPopupOpen));
         }
 
-        // Kommando zum Schließen des Popups
+        /// <summary>
+        /// Kommando zum Schließen des Popups
+        /// </summary>
         public ICommand OpenPopupCommand { get; }
 
         private void OpenPopup(object? parameter)
